@@ -1,11 +1,14 @@
-import numpy as np
-import time
-from copy import deepcopy
 import os
 import sys
+import time
 import torch
 import pickle
 import openai
+import numpy as np
+
+from copy import deepcopy
+from collections import defaultdict
+
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 
