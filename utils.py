@@ -41,6 +41,17 @@ def random_sampling(sentences, labels, num):
     assert len(sentences) == len(labels)
     if num > len(labels):
         assert False, f"you tried to randomly sample {num}, which is more than the total size of the pool {len(labels)}"
+    
+    idxs = np.random.choice(len(labels), size=num, replace=False)
+    selected_sentences = [sentences[i] for i in idxs]
+    selected_labels = [labels[i] for i in idxs]
+    return deepcopy(selected_sentences), deepcopy(selected_labels)
+
+def random_sampling_train(sentences, labels, num):
+    """randomly sample subset of the training pairs"""
+    assert len(sentences) == len(labels)
+    if num > len(labels):
+        assert False, f"you tried to randomly sample {num}, which is more than the total size of the pool {len(labels)}"
     labels_set = list(set(labels))
     labels_set.sort()
     
