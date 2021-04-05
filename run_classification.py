@@ -62,7 +62,7 @@ def save_results(params_list, freeze_test_set=True):
 
         ### sample few-shot training examples
         np.random.seed(params['seed'])
-        train_sentences, train_labels = random_sampling(all_train_sentences, all_train_labels, params['num_shots'])
+        train_sentences, train_labels = random_sampling_train(all_train_sentences, all_train_labels, params['num_shots'])
 
         ### Evaluate the performance and save all results
         # obtaining model's response on test examples
