@@ -38,9 +38,22 @@ def random_sampling(sentences, labels, num):
     assert len(sentences) == len(labels)
     if num > len(labels):
         assert False, f"you tried to randomly sample {num}, which is more than the total size of the pool {len(labels)}"
-    idxs = np.random.choice(len(labels), size=num, replace=False)
-    selected_sentences = [sentences[i] for i in idxs]
-    selected_labels = [labels[i] for i in idxs]
+    labels_set = list(set(labels))
+    labels_set.sort()
+    
+    data = defaultdict(list)
+    for sentence, label in zip(sentences, labels_set):
+        data[label].append(sentence)
+    
+    selected_sentences = []
+    selected_labels = []
+    for label in data:
+        selected_sentences += np.random.choice(data[label], size=num, replace=False).tolist()
+        selected_labels += [label for _ in range(num)]
+    
+    # idxs = np.random.choice(len(labels), size=num, replace=False)
+    # selected_sentences = [sentences[i] for i in idxs]
+    # selected_labels = [labels[i] for i in idxs]
     return deepcopy(selected_sentences), deepcopy(selected_labels)
 
 gpt2_model = None
