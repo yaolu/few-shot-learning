@@ -52,11 +52,9 @@ def random_sampling_train(sentences, labels, num):
     assert len(sentences) == len(labels)
     if num > len(labels):
         assert False, f"you tried to randomly sample {num}, which is more than the total size of the pool {len(labels)}"
-    labels_set = list(set(labels))
-    labels_set.sort()
     
     data = defaultdict(list)
-    for sentence, label in zip(sentences, labels_set):
+    for sentence, label in zip(sentences, labels):
         data[label].append(sentence)
     
     selected_sentences = []
